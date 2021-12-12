@@ -1,9 +1,9 @@
 ﻿#requires -Version 4.0 -Modules PSDesiredStateConfiguration
-
-Configuration DisableServices 
+Configuration DisableWindowsServices 
 {
   Import-DscResource -ModuleName PSDesiredStateConfiguration
-  Node localhost {
+  Node 'localhost' 
+  {
     Service bthserv
     {
       Name        = 'bthserv'
@@ -18,7 +18,5 @@ Configuration DisableServices
     }
   }
 }
-
-DisableServices
-
-Start-DscConfiguration  -Path .\DisableServices -Wait -Force -Verbose
+DisableWindowsServices -OutputPath "$env:SystemDrive\DSC"
+Start-DscConfiguration -Path "$env:SystemDrive\DSC" -Wait -Force

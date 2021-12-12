@@ -1,9 +1,8 @@
 ﻿#requires -Version 4.0 -Modules PSDesiredStateConfiguration, cChoco
-
 Configuration Install7zip
 {
   Import-DscResource -ModuleName cChoco
-  node localhost
+  node 'localhost'
   {
     cChocoInstaller InstallChoco
     {
@@ -16,7 +15,5 @@ Configuration Install7zip
     }
   }
 }
-
-Install7zip
-
-Start-DscConfiguration -Path .\Install7zip -Wait -Force -Verbose
+Install7zip -OutputPath "$env:SystemDrive\DSC"
+Start-DscConfiguration -Path "$env:SystemDrive\DSC" -Wait -Force
